@@ -64,3 +64,4 @@ Array.prototype.reduce = function(cb, initialvalue){
 
     return accumulator;
 }
+
