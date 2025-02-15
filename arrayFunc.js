@@ -22,6 +22,23 @@ const sum = nums.reduce((acc,curr,i, arr)=>{
 
 //acc is set 0 initially and then keep updating the sum with curr value
 
+//can also be used to make a obj
+
+const posts = [
+    {id: 1, category: "frontend", title: "All About That Sass"},
+    {id: 2, category: "backend", title: "Beam me up, Scotty: Apache Beam tips"},
+    {id: 3, category: "frontend", title: "Sanitizing HTML: Going antibactirial on XSS attacks"}
+];
+
+const categoryPosts = posts.reduce((acc, post)=>{
+    const {id,category} = post
+    return {...acc, [category]:[...(acc[category] || []),id]}
+},{})
+
+// {
+//     frontend: [1, 3],
+//     backend: [2]
+// }
 // creating own map function(polyfill)
 Array.prototype.myMap = function(cb){
     let temp = []
@@ -57,6 +74,14 @@ const morethan3 = nums.myFilter((num,i,arr)=>{
 // pollyfil for reduce
 
 Array.prototype.reduce = function(cb, initialvalue){
+    if (!Array.isArray(this)) {
+        throw new TypeError("Array.prototype.reduce called on a non-array object");
+    }
+
+    if (typeof cb !== "function") {
+        throw new TypeError("Callback function is required in reduce");
+    }
+    
     let accumulator = initialvalue;
     for(let i=0; i<this.length; i++){
         accumulator = accumulator ? cb(accumulator,this[i],i,this) : this[i];

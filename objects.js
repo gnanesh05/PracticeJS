@@ -107,7 +107,7 @@ multiply(value) // 40
 
 //shallow
 let newUser = {...user}  // using spread operator
-//operations made in copied variable will affect original
+//operations made in copied variable will not affect original except the nested properties
 //When you make a shallow copy of an object or array in programming, any nested objects or arrays inside the original structure are not fully duplicated. 
 //Instead, the references to those nested objects or arrays are copied.
 let original = { name: "Alice", age: 25 };

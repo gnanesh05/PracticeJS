@@ -62,10 +62,10 @@ var arr = [5,6]
 multiply(...arr) //spread
 
 //ex
- const fn = (x,y,...numbers,z)=>{
-    console.log(x,y,z,numbers)
- }
- fn(4,5,6,7,8,9)
+//  const fn = (x,y,...numbers,z)=>{
+//     console.log(x,y,z,numbers)
+//  }
+//  fn(4,5,6,7,8,9)
 
  // this is will throw error because rest params are supposed to be last.
 
@@ -315,3 +315,4 @@ function add(a){
 // now we can do infite currying until we pass value as argument
 add(2)(4)(5)() //->11
 add(2)(4)(5)(6) // ->17 
+
