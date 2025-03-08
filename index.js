@@ -270,6 +270,17 @@ console.log(memoizedClumsyProduct(23,24));
 console.time("second call")
 console.log(memoizedClumsyProduct(23,24))
 
+function memoisedPower(){
+    const res  = {}
+        return function power(base, exponent){
+            if(exponent==0) return 1
+            if (exponent==1) return base
+            const argsCache = `${base}-${exponent}`
+            if(!res[argsCache]){
+                res[argsCache] = base * power(base, exponent-1);}
+            return res[argsCache]}
+}
+
 
 // currying
 function f(a){
