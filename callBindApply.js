@@ -157,3 +157,15 @@ const newFunc = purchaseCar.myBind(car,"$", 500000);
 console.log(newFunc())
 
 
+// 
+const obj = { name: "Eve" };
+
+function greet() {
+    return () => {
+        console.log("Hello, " + this.name);
+    };
+}
+
+const arrowFunc = greet.call(obj);
+arrowFunc(); // ❓ undefined the arrow function takes this from where greet() was originally defined, not where it was called.
+

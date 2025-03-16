@@ -30,9 +30,50 @@
  //Both callbacks and promises are mechanisms to handle asynchronous operations in JavaScript, such as fetching data, reading files, or setting timeouts. However,
  //  they differ significantly in how they are implemented and used.
 
+ //example to show callbacks used in async operations
+ function fetchData(callback){
+    setTimeout(()=>{
+        const data = {messsage:"data fetch success"};
+        callback(data);
+    },1000);
+ }
+ function processData(data){
+    console.log("data processed - ", data);
+ }
+
+ fetchData(processData);
  //A callback is a function passed as an argument to another function, which will execute the callback when an operation is complete.
  //it has a limitation called callback hell when multiple callbacks are nested and also error handling is cubersome
 
+ function step1(next) {
+    setTimeout(() => {
+        console.log("Step 1 complete");
+        next();
+    }, 1000);
+}
+
+function step2(next) {
+    setTimeout(() => {
+        console.log("Step 2 complete");
+        next();
+    }, 1000);
+}
+
+function step3(next) {
+    setTimeout(() => {
+        console.log("Step 3 complete");
+        next();
+    }, 1000);
+}
+
+// Nested callbacks (callback hell)
+step1(() => {
+    step2(() => {
+        step3(() => {
+            console.log("All steps done!");
+        });
+    });
+});
 
  //A promise is an object that represents the eventual completion (or failure) of an asynchronous operation.
  // there are 3 states
@@ -178,5 +219,23 @@ function promiseRec(promises){
 }
 
 promiseRec([promise1, promise2,promise3]);
+
+
+const fetchPosts = fetch("https://jsonplaceholder.typicode.com/posts").then((res) => {
+    if (!res.ok) throw new Error(`HTTP Error! Status: ${res.status}`);
+    return res.json();
+});
+
+const fetchComments = fetch("https://jsonplaceholder.typicode.com/comments").then((res) => {
+    if (!res.ok) throw new Error(`HTTP Error! Status: ${res.status}`);
+    return res.json();
+});
+
+const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users").then((res) => {
+    if (!res.ok) throw new Error(`HTTP Error! Status: ${res.status}`);
+    return res.json();
+});
+
+
 
 

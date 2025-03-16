@@ -31,6 +31,33 @@ console.log(this.a) //5
 
 // implicit binding
 
+// Regular functions (function) take this from the object that called them.
+// Arrow functions (=>) take this from their lexical scope (where they were defined).
+
+const obj1 = {
+    name: "Alice",
+    method() {
+        const arrowFn = () => {
+            console.log(this.name);
+        };
+        arrowFn();
+    }
+};
+
+obj.method(); // Alice ✅
+
+const obj3 = {
+    name: "Alice",
+    method() {
+        function regularFn() {
+            console.log(this.name);
+        }
+        regularFn();
+    }
+};
+
+obj.method();  //undefined because regular function regularFn() is called as standalone function with no explicit object
+// to ffix this use obj3.regularFn() or regularFn.bind(this)()
 //q1
 user = {
     firstName:"hello",
@@ -205,4 +232,22 @@ function random(){
                     // if instead of var x = 21, it was x=21 output will be 43
     x=21
 }
+
+//Q
+const obj4 = {
+    name: "Alice",
+    method() {
+        const fn = function () {
+            console.log(this.name);
+        };
+
+        return fn;
+    }
+};
+
+const fnRef = obj.method();
+fnRef(); // ❓  //undefined
+//fnref holds reference to fn but fnref is called as standalone function. 
+// to fix use bind function(){console.log(this.name)}.bind(this)  or use arrow function
+
 
