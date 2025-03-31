@@ -48,6 +48,7 @@ Array.prototype.myMap = function(cb){
     return temp;
 }
 
+
 const multiply4 = nums.myMap((num, index, arr)=>{
     return num * 3;
  })

@@ -237,5 +237,27 @@ const fetchUsers = fetch("https://jsonplaceholder.typicode.com/users").then((res
 });
 
 
+function promiseAll(iterable) {
+    return new Promise((resolve, reject)=>{
+     let result = []
+     let completed = 0
+     if(iterable.length ===0){
+       resolve(result)
+     }
+     iterable.forEach((promise, index)=>{
+       Promise.resolve(promise)
+              .then((value)=>{
+               result[index] = value
+               completed ++;
+ 
+               if(completed === iterable.length){
+                 resolve(result);
+               }
+              })
+              .catch(reject)
+     })
+    })
+ }
+
 
 
